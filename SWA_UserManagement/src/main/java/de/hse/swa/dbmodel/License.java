@@ -2,6 +2,7 @@ package de.hse.swa.dbmodel;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -14,6 +15,7 @@ public class License implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int licenseID;
 
 	private String expirationDate;
@@ -24,13 +26,13 @@ public class License implements Serializable {
 
 	private String licenseKey;
 
-	//bi-directional many-to-one association to Productversion
-	@ManyToOne
-	private Productversion productversion;
-
 	//bi-directional many-to-one association to Servicecontract
 	@ManyToOne
 	private Servicecontract servicecontract;
+
+	//bi-directional many-to-one association to User
+	@OneToMany(mappedBy="license")
+	private List<User> users;
 
 	public License() {
 	}
@@ -75,20 +77,34 @@ public class License implements Serializable {
 		this.licenseKey = licenseKey;
 	}
 
-	public Productversion getProductversion() {
-		return this.productversion;
-	}
-
-	public void setProductversion(Productversion productversion) {
-		this.productversion = productversion;
-	}
-
 	public Servicecontract getServicecontract() {
 		return this.servicecontract;
 	}
 
 	public void setServicecontract(Servicecontract servicecontract) {
 		this.servicecontract = servicecontract;
+	}
+
+	public List<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public User addUser(User user) {
+		getUsers().add(user);
+		user.setLicense(this);
+
+		return user;
+	}
+
+	public User removeUser(User user) {
+		getUsers().remove(user);
+		user.setLicense(null);
+
+		return user;
 	}
 
 }

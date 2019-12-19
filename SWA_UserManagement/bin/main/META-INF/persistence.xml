@@ -3,9 +3,7 @@
 	<persistence-unit name="SWA_UserManagement">
 		<class>de.hse.swa.dbmodel.Company</class>
 		<class>de.hse.swa.dbmodel.License</class>
-		<class>de.hse.swa.dbmodel.Productversion</class>
 		<class>de.hse.swa.dbmodel.Servicecontract</class>
-		<class>de.hse.swa.dbmodel.Systemadministrator</class>
 		<class>de.hse.swa.dbmodel.User</class>
 	</persistence-unit>
 </persistence>

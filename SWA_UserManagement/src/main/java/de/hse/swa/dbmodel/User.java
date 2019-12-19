@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userID;
 
 	@Column(name="CURRENT_CONNECTIONS")
@@ -23,26 +24,30 @@ public class User implements Serializable {
 
 	private String emailAddress;
 
-	private String fistName;
+	private byte isSystemAdmin;
 
-	private String lastName;
+	private String name;
 
-	private String loginName;
-
-	private String password;
+	private byte password;
 
 	@Column(name="TOTAL_CONNECTIONS")
 	private BigInteger totalConnections;
 
 	private String user;
 
+	private String username;
+
 	//bi-directional many-to-one association to Company
 	@ManyToOne
 	private Company company;
 
-	//bi-directional many-to-one association to Systemadministrator
+	//bi-directional many-to-one association to License
 	@ManyToOne
-	private Systemadministrator systemadministrator;
+	private License license;
+
+	//bi-directional many-to-one association to Servicecontract
+	@ManyToOne
+	private Servicecontract servicecontract;
 
 	public User() {
 	}
@@ -71,35 +76,27 @@ public class User implements Serializable {
 		this.emailAddress = emailAddress;
 	}
 
-	public String getFistName() {
-		return this.fistName;
+	public byte getIsSystemAdmin() {
+		return this.isSystemAdmin;
 	}
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
+	public void setIsSystemAdmin(byte isSystemAdmin) {
+		this.isSystemAdmin = isSystemAdmin;
 	}
 
-	public String getLastName() {
-		return this.lastName;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLoginName() {
-		return this.loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
-	public String getPassword() {
+	public byte getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(byte password) {
 		this.password = password;
 	}
 
@@ -119,6 +116,14 @@ public class User implements Serializable {
 		this.user = user;
 	}
 
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public Company getCompany() {
 		return this.company;
 	}
@@ -127,12 +132,20 @@ public class User implements Serializable {
 		this.company = company;
 	}
 
-	public Systemadministrator getSystemadministrator() {
-		return this.systemadministrator;
+	public License getLicense() {
+		return this.license;
 	}
 
-	public void setSystemadministrator(Systemadministrator systemadministrator) {
-		this.systemadministrator = systemadministrator;
+	public void setLicense(License license) {
+		this.license = license;
+	}
+
+	public Servicecontract getServicecontract() {
+		return this.servicecontract;
+	}
+
+	public void setServicecontract(Servicecontract servicecontract) {
+		this.servicecontract = servicecontract;
 	}
 
 }
