@@ -16,7 +16,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
 
 	@Column(name="CURRENT_CONNECTIONS")
@@ -37,17 +37,11 @@ public class User implements Serializable {
 
 	private String username;
 
+	private String userscol;
+
 	//bi-directional many-to-one association to Company
 	@ManyToOne
 	private Company company;
-
-	//bi-directional many-to-one association to License
-	@ManyToOne
-	private License license;
-
-	//bi-directional many-to-one association to Servicecontract
-	@ManyToOne
-	private Servicecontract servicecontract;
 
 	public User() {
 	}
@@ -124,28 +118,20 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public String getUserscol() {
+		return this.userscol;
+	}
+
+	public void setUserscol(String userscol) {
+		this.userscol = userscol;
+	}
+
 	public Company getCompany() {
 		return this.company;
 	}
 
 	public void setCompany(Company company) {
 		this.company = company;
-	}
-
-	public License getLicense() {
-		return this.license;
-	}
-
-	public void setLicense(License license) {
-		this.license = license;
-	}
-
-	public Servicecontract getServicecontract() {
-		return this.servicecontract;
-	}
-
-	public void setServicecontract(Servicecontract servicecontract) {
-		this.servicecontract = servicecontract;
 	}
 
 }

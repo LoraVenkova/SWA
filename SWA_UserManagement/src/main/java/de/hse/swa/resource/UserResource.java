@@ -31,8 +31,8 @@ public class UserResource {
 	//Application integration     
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Tuser getTuser() {
-		Tuser user = UserDao.getInstance().getTuser(id);
+	public User getTuser() {
+		User user = UserDao.getInstance().getUser(id);
 		if(user==null)
 			throw new RuntimeException("Get: Tuser with " + id +  " not found");
 		return user;
@@ -41,8 +41,8 @@ public class UserResource {
 	// for the browser
 	@GET
 	@Produces(MediaType.TEXT_XML)
-	public Tuser getTuserHTML() {
-		Tuser user = UserDao.getInstance().getTuser(id);
+	public User getTuserHTML() {
+		User user = UserDao.getInstance().getUser(id);
 		if(user==null)
 			throw new RuntimeException("Get: Tuser with " + id +  " not found");
 		return user;
@@ -50,19 +50,19 @@ public class UserResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response putTuser(JAXBElement<Tuser> user) {
-		Tuser c = user.getValue();
+	public Response putTuser(JAXBElement<User> user) {
+		User c = user.getValue();
 		return putAndGetResponse(c);
 	}
 
 	@DELETE
 	public void deleteTuser() {
-		UserDao.getInstance().deleteTuser(id);
+		UserDao.getInstance().deleteUser(id);
 	}
 
-	private Response putAndGetResponse(Tuser user) {
+	private Response putAndGetResponse(User user) {
 		Response res;
-		UserDao.getInstance().saveTuser(user);
+		UserDao.getInstance().saveUser(user);
 		res = Response.created(uriInfo.getAbsolutePath()).build();
 		return res;
 	}

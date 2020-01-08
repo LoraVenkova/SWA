@@ -3,7 +3,21 @@
 	<persistence-unit name="SWA_UserManagement">
 		<class>de.hse.swa.dbmodel.Company</class>
 		<class>de.hse.swa.dbmodel.License</class>
+		<class>de.hse.swa.dbmodel.Sequence</class>
 		<class>de.hse.swa.dbmodel.Servicecontract</class>
 		<class>de.hse.swa.dbmodel.User</class>
+						<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/usermanagementdb?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="eclipselink.jdbc.exclusive-connection.is-lazy" value="false"/>
+			<property name="eclipselink.jdbc.exclusive-connection.mode" value="Always"/>
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+			<property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
+			<property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
+			<property name="eclipselink.ddl-generation.output-mode" value="both"/>		
+			</properties>
 	</persistence-unit>
 </persistence>

@@ -16,7 +16,7 @@ public class Servicecontract implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int serviceContractID;
 
 	@Temporal(TemporalType.DATE)
@@ -32,10 +32,6 @@ public class Servicecontract implements Serializable {
 	//bi-directional many-to-one association to Company
 	@ManyToOne
 	private Company company;
-
-	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="servicecontract")
-	private List<User> users;
 
 	public Servicecontract() {
 	}
@@ -92,28 +88,6 @@ public class Servicecontract implements Serializable {
 
 	public void setCompany(Company company) {
 		this.company = company;
-	}
-
-	public List<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public User addUser(User user) {
-		getUsers().add(user);
-		user.setServicecontract(this);
-
-		return user;
-	}
-
-	public User removeUser(User user) {
-		getUsers().remove(user);
-		user.setServicecontract(null);
-
-		return user;
 	}
 
 }

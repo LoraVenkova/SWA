@@ -31,17 +31,17 @@ public class UserDao {
 	
 	public User getUserByUserId(int id) {
 		try {
-		return (User) em.createQuery("SELECT u FROM users u WHERE u.userID=:userid")
-                .setParameter("userid", id).getSingleResult();
+		return (User) em.createQuery("SELECT u FROM Users u WHERE u.ID=:id")
+                .setParameter("id", id).getSingleResult();
 		} catch(NoResultException e) {
 			return null;
 		}
 	}
 
 	public List<User> getUsers() {
-		Query q = em.createQuery("select c from users c");
-		List<User> users = q.getResultList();
-		return users;
+		Query q = em.createQuery("select c from Users c");
+		List<User> Users = q.getResultList();
+		return Users;
 	}
 	
 	public void saveUser(User user) {
@@ -54,7 +54,7 @@ public class UserDao {
 
 	public void deleteUser(Integer id) {
 
-		User cm = em.find(User.class, id);
+		UserDao cm = em.find(UserDao.class, id);
 		if (cm != null) {
 			em.getTransaction().begin();
 			em.remove(cm);
