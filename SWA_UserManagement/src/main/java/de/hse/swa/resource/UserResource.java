@@ -50,7 +50,7 @@ public class UserResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response putTuser(JAXBElement<User> user) {
+	public Response putUser(JAXBElement<User> user) {
 		User c = user.getValue();
 		return putAndGetResponse(c);
 	}

@@ -29,7 +29,7 @@ public class CompanyDao {
 		return em.find(Company.class, id);
 	}
 	
-	public Company getUserByUserId(int id) {
+	public Company getCompanyByCompanyId(int id) {
 		try {
 		return (Company) em.createQuery("SELECT c FROM Company c WHERE c.companyID=:companyid")
                 .setParameter("companyid", id).getSingleResult();
@@ -38,11 +38,13 @@ public class CompanyDao {
 		}
 	}
 
-	public List<Company> getUsers() {
+	public List<Company> getCompanies() {
 		Query q = em.createQuery("select c from Company c");
-		List<Company> company = q.getResultList();
-		return company;
+		List<Company> companies = q.getResultList();
+		return companies;
 	}
+	
+	
 	
 	public void saveCompany(Company company) {
 		em.getTransaction().begin();
@@ -50,7 +52,12 @@ public class CompanyDao {
 		em.getTransaction().commit();
 	}
 	
-	
+	public void updateCompany(int id) {
+		em.getTransaction().begin();
+		em.refresh(CompanyDao.getInstance().getCompany(id));
+		em.getTransaction().commit();
+	}
+	   
 
 	public void deleteCompany(Integer id) {
 

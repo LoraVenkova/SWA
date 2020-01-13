@@ -1,7 +1,9 @@
 package de.hse.swa.dao;
+import de.hse.swa.dbmodel.License;
 import de.hse.swa.dbmodel.User;
 
 import java.util.List;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -29,19 +31,19 @@ public class UserDao {
 		return em.find(User.class, id);
 	}
 	
-	public User getUserByUserId(int id) {
+	public User getUsersByUserId(int id) {
 		try {
-		return (User) em.createQuery("SELECT u FROM Users u WHERE u.ID=:id")
-                .setParameter("id", id).getSingleResult();
+		return (User) em.createQuery("SELECT u FROM Users u WHERE u.userID=:userid")
+                .setParameter("userid", id).getSingleResult();
 		} catch(NoResultException e) {
 			return null;
 		}
 	}
 
 	public List<User> getUsers() {
-		Query q = em.createQuery("select c from Users c");
-		List<User> Users = q.getResultList();
-		return Users;
+		Query q = em.createQuery("select u from User u");
+		List<User> users = q.getResultList();
+		return users;
 	}
 	
 	public void saveUser(User user) {
@@ -51,7 +53,6 @@ public class UserDao {
 	}
 	
 	
-
 	public void deleteUser(Integer id) {
 
 		UserDao cm = em.find(UserDao.class, id);

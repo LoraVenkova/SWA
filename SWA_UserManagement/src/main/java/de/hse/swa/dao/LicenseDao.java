@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+
+
 import de.hse.swa.dbmodel.License;
 
 public class LicenseDao {
@@ -28,7 +30,7 @@ public class LicenseDao {
 		return em.find(License.class, id);
 	}
 	
-	public License getLicenseByLicenseId(int id) {
+	public License getLicensesByLicenseId(int id) {
 		try {
 		return (License) em.createQuery("SELECT l FROM License l WHERE l.licenseID=:licenseid")
                 .setParameter("licenseid", id).getSingleResult();
@@ -37,10 +39,10 @@ public class LicenseDao {
 		}
 	}
 
-	public List<License> getUsers() {
-		Query q = em.createQuery("select c from users c");
-		List<License> users = q.getResultList();
-		return users;
+	public List<License> getLicenses() {
+		Query q = em.createQuery("select l from License l");
+		List<License> licenses = q.getResultList();
+		return licenses;
 	}
 	
 	public void saveLicense(License license) {
@@ -49,9 +51,14 @@ public class LicenseDao {
 		em.getTransaction().commit();
 	}
 	
+	public void updateLicense(int id) {
+		em.getTransaction().begin();
+		em.refresh(LicenseDao.getInstance().getLicense(id));
+		em.getTransaction().commit();
+	}
 	
 
-	public void deleLicense(Integer id) {
+	public void deleteLicense(Integer id) {
 
 		License cm = em.find(License.class, id);
 		if (cm != null) {
